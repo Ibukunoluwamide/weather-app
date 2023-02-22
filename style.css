@@ -1,0 +1,62 @@
+body{
+    background: url("https://th.bing.com/th/id/R.2477aa6bce203b56c047595ec5442e00?rik=kEPnonhcD9F3fA&pid=ImgRaw&r=0");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+   min-height: 100vh;
+    padding-top: 1in;
+    font-family: 'Itim', cursive;
+}
+input::placeholder{
+    color: #fff;
+}
+h4{
+    color: #fff;
+    font-size: 7.6em !important;
+}
+h2{
+    color: #fff;
+
+}
+h5{
+    color: blue;
+
+}
+
+h6{
+    color: white;
+    font-weight: 900;
+}
+input{
+    width: 300px;
+    padding: 5px;
+    font-size: 25px;
+    border: none;
+    border-bottom: 2px solid blue;
+    background-color: transparent;
+    color: #fff;
+    outline: none;
+}
+button{
+    background-color: blue;
+    color: #fff;
+    width: 120px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+}
+.details{
+    backdrop-filter: blur(50px);
+    /* background-color: aqua; */
+    width: 40vw;
+    min-height: 60vh;
+    padding: 20px;
+}
+@media only screen and (max-width: 688px) {
+     .details{
+        backdrop-filter: blur(25px);
+        width: 100vw;
+        padding:10px;
+    }
+}

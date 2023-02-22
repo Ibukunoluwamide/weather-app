@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <title>Weather Checker</title>
+</head>
+<style>
+  
+</style>
+<body  onload="loading()">
+    <div  id="loadin"></div>
+   <section class="d-lg-flex justify-content-between mt-3">
+    <div>
+        <input type="text" id="myLocations" class="ms-2" placeholder="Search Location">
+        <!-- <button onclick="getWeather()">Fetch</button> -->
+        <h4 id="temp" style="padding-top: .5in;"></h4>
+        <h2 id="cityName"> <h6 id=""></h6></h2>
+      </div>
+   <div class="details rounded">
+    <h2 on class="mb-3" style="font-size: 2.5em;color:  rgb(3, 3, 189);font-weight: bold;text-decoration: underline;">Weather Details</h2>
+    <h5 class="fw-bold mt-4">Humidity: </h5>
+    <h6 id="humi"></h6>
+    <h5 class="fw-bold mt-4">Weather: </h5><h6 id="main"></h6>
+    <h5 class="fw-bold mt-4">Description:</h5> <h6 id="descript"></h6>
+   </div>
+   </section>
+   <script>
+  
+       myLocations.addEventListener("keydown",()=>{
+           getWeather()
+        })
+        function getWeather (){
+            const city = myLocations.value
+            const apiKey = "64d8fe83d2b504f2439b96e57a2c3830"
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+             fetch(url)
+             .then((weatherReport)=>{
+                return weatherReport.json()
+             })
+             .then((convertedWeatherReport)=>{
+                 cityName.innerHTML =`${convertedWeatherReport.name}, ${convertedWeatherReport.sys.country}`   
+                 humi.innerHTML = `${convertedWeatherReport.main.humidity}%`
+                 temp.innerHTML = `${Math.round(convertedWeatherReport.main.temp)}°C`
+                 main.innerHTML = `${convertedWeatherReport.weather[0].main}`
+                 descript.innerHTML = `${convertedWeatherReport.weather[0].description}`
+                    console.log(convertedWeatherReport)
+
+             })
+             
+             // let weatherApi = "https://openweathermap.org/current"
+             
+            }
+            navigator.geolocation.getCurrentPosition((currentLocation)=>{
+                console.log(currentLocation)
+            const apiKey = "64d8fe83d2b504f2439b96e57a2c3830"
+                var latitude = currentLocation.coords.latitude
+                var longitude = currentLocation.coords.longitude
+                let endPointGeolocation = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
+                fetch( endPointGeolocation)
+             .then((geoReport)=>{
+                return geoReport.json()
+             })
+             .then((convertedGeoReport)=>{
+                 cityName.innerHTML =`${convertedGeoReport.name}, ${convertedGeoReport.sys.country}`   
+                 humi.innerHTML = `${convertedGeoReport.main.humidity}%`
+                 temp.innerHTML = `${Math.round(convertedGeoReport.main.temp)}°C`
+                 main.innerHTML = `${convertedGeoReport.weather[0].main}`
+                 descript.innerHTML = `${convertedGeoReport.weather[0].description}`
+                    console.log(convertedGeoReport)
+
+             })
+                console.log(latitude)
+                console.log(longitude)
+            })
+            const loading = ()=>{
+               loadin.innerHTML = `<img src="https://media.giphy.com/media/uHKpmhC7ADBA1EFSl6/giphy.gif" />`
+              setTimeout(() => {
+                loadin.innerHTML = ""
+              }, 2500);
+             }
+    </script>
+</body>
+</html>
